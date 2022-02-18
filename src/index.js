@@ -33,6 +33,8 @@ var app = new Vue({
   data: {
     // message: 'Hello Vue!'
     moviesList: [],
+    moviesListGotResponse: false,
+    errorMessage: "",
     inputText: "",
     oldIndex: 0,
     newIndex: 0
@@ -43,7 +45,8 @@ var app = new Vue({
         .then(res => res.json())
         .then((res)=> {
           this.moviesList = res.Search
-          console.log(this.moviesList)
+          this.moviesListGotResponse = res.Response
+          this.errorMessage = res.Error
         })
     },
     search: function() {
