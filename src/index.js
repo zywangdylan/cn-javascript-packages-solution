@@ -1,3 +1,4 @@
+// Vanilla JS
 // const list = document.querySelector("#results")
 
 // const insertMovies = (data) => {
@@ -25,13 +26,13 @@
 //   fetchMovies(input.value)
 // })
 
+// Vue.js
 // import { initSortable } from "./plugins/init_sortable"
 import Sortable from "sortablejs"
 
 var app = new Vue({
   el: '#app',
   data: {
-    // message: 'Hello Vue!'
     moviesList: [],
     moviesListGotResponse: false,
     errorMessage: "",
@@ -40,6 +41,7 @@ var app = new Vue({
     newIndex: 0
   },
   methods: {
+    // Fetch movie list via API call
     fetchMovies: function (query) {
       fetch(`http://www.omdbapi.com/?s=${query}&apikey=adf1f2d7`)
         .then(res => res.json())
@@ -49,12 +51,14 @@ var app = new Vue({
           this.errorMessage = res.Error
         })
     },
+    // Handle click event
     search: function() {
       this.fetchMovies(this.inputText)
     },
+    // Init sortable js
     initSortable: function() {
       let page = this;
-      Sortable.create(this.$refs.results, {
+      Sortable.create(page.$refs.results, {
           ghostClass: "ghost",
           animation: 150,
           onEnd: (event) => {
